@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech Extension</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            padding: 10px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        textarea {
+            width: 80%;
+            height: 50px;
+            margin: 10px 0;
+            padding: 10px;
+            resize: none;
+        }
+
+        button {
+            padding: 10px;
+            margin: 5px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        #outputContainer {
+            display: none;
+            margin-top: 20px;
+        }
+
+        #translatedText {
+            color: green;
+        }
+    </style>
+    <script src="popup.js"></script>
+</head>
+<body>
+    <h3>Speech Extension Popup</h3>
+    <textarea id="userInput" placeholder="Enter text..."></textarea>
+    <!-- <button id="startRecording">Start Recording</button>
+    <button id="stopRecording">Stop Recording</button> -->
+    
+
+    <div>
+        <h3>Select Language:</h3>
+        <select id="languageDropdown">
+            <option value="en">English</option>
+            <option value="es">Hindi</option>
+            <option value="pb">Punjabi</option>
+            <option value="mr">Marathi</option>
+            <option value="bg">Bengali</option>
+            <!-- Add more options as needed -->
+        </select>
+    </div>
+    <button id="getText">Get Text</button>
+    
+
+    <div id="outputContainer">
+        <h3>Translated Text:</h3>
+        <p id="translatedText"></p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <title>Translator and Summarizer Interface</title>
+    <link rel="stylesheet" href="custom.css">
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #495057;
+        }
+
+        #header-image {
+            width: 100%;
+            height: auto;
+            position: relative;
+        }
+
+        .container {
+            margin-top: 20px;
+        }
+
+        h1 {
+            color: #007bff;
+        }
+
+        .flex-item {
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            font-size: 16px;
+            border: 2px solid #000203;
+            border-radius: 10px;
+        }
+
+        .language-dropdown {
+            width: 1100px;
+            font-size: 16px;
+        }
+
+        .mic-buttons {
+            position: relative;
+            display: inline-block;
+        }
+
+        .mic-button,
+        .mute-button {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            font-size: 18px;
+        }
+
+        .btn-primary,
+        .btn-danger {
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+    <img id="header-image" src="https://iili.io/JVE3Q29.jpg" alt="Header Image">
+
+    <div class="container mt-5">
+
+        <div class="row">
+            <div class="col-md-6">
+                {% if translated_text %}
+                <div class="flex-item">
+                    <h2 style="font-family: 'Space Grotesk'">Translation:</h2>
+                    <textarea class="form-control" rows="10" cols="50" required>{{ translated_text }}</textarea>
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="col-md-6">
+                {% if summarized_text %}
+                <div class="flex-item">
+                    <h2 style="font-family: 'Space Grotesk'">Summary:</h2>
+                    <textarea class="form-control" rows="10" cols="50" required>{{ summarized_text }}</textarea>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <form action="/process" method="post">
+            <div class="form-group">
+                <label for="user_input" style="font-family: 'Space Grotesk'; font-size: 30px;">Enter text</label>
+                <textarea class="form-control" id="user_input" name="user_input" rows="10" cols="50" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="input_language">Input language:</label>
+                <select class="form-control language-dropdown" class="input_language" name="input_language">
+                    <option value="en">English</option>
+                    <option value="hi">Hindi</option>
+                    <option value="kn">Kannada</option>
+                    <option value="mr">Marathi</option>
+                    <option value="pa">Punjabi</option>
+                    <option value="ur">Urdu</option>
+                    <option value="ta">Tamil</option>
+                    <option value="ml">Malayalam</option>
+                    <option value="bn">Bengali</option>
+                    <option value="sn">Sindhi</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="target_language">Target language:</label>
+                <select class="form-control language-dropdown" id="target_language" name="target_language">
+                    <option value="en">English</option>
+                    <option value="hi">Hindi</option>
+                    <option value="kn">Kannada</option>
+                    <option value="mr">Marathi</option>
+                    <option value="pa">Punjabi</option>
+                    <option value="ur">Urdu</option>
+                    <option value="ta">Tamil</option>
+                    <option value="ml">Malayalam</option>
+                    <option value="bn">Bengali</option>
+                    <option value="sn">Sindhi</option>
+                </select>
+            </div>
+
+            <input type="submit" value="Translate and Summarize" class="btn btn-primary">
+        </form>
+
+        <div class="mt-5">
+            <button onclick="startSpeechRecognition()" class="btn btn-primary"><i class="fa fa-microphone"></i></button>
+            <button onclick="stopSpeechRecognition()" class="btn btn-danger"><i class="fa fa-microphone-slash"></i></button>
+        </div>
+    </div>
+
+    <script>
+        let recognition;
+
+        function startSpeechRecognition() {
+            recognition = new webkitSpeechRecognition();
+            recognition.continuous = true;
+            recognition.interimResults = true;
+            recognition.lang = 'en-US';
+            recognition.onresult = function (event) {
+                let transcription = '';
+                for (let i = event.resultIndex; i < event.results.length; ++i) {
+                    if (event.results[i].isFinal) {
+                        transcription += event.results[i][0].transcript + ' ';
+                    }
+                }
+                document.getElementById('user_input').value = transcription;
+            };
+            recognition.start();
+        }
+
+        function stopSpeechRecognition() {
+            if (recognition) {
+                recognition.stop();
+            }
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "Speech Extension",
+  "version": "1.0.0",
+  "description": "A Chrome extension for speech recognition",
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "action": {
+    "default_icon": {
+      "128": "logo.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ]
+}
+
