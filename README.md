@@ -1,15 +1,16 @@
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<img width="1280" alt="Screenshot 2024-03-07 at 10 04 19 AM" src="https://github.com/CS251000/Genetix.AI/assets/99918088/457decfe-a1ce-4d5d-8f12-27d99177f79d">
+<img width="1280" alt="Screenshot 2024-03-07 at 10 05 23 AM" src="https://github.com/CS251000/Genetix.AI/assets/99918088/7ec7855b-9caa-4084-be87-3eb5167fb33c">
+<img width="1280" alt="Screenshot 2024-03-07 at 10 04 04 AM" src="https://github.com/CS251000/Genetix.AI/assets/99918088/02101313-8529-4ed8-bbd9-b431baf39850">
+
 
 ## Available Scripts
 
 In the project directory, you can run:
 
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### `python3 app.py`
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
